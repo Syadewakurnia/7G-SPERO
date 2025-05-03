@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Pesan Sekarang</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Rubik', sans-serif; background-color: #f9f9f9; margin: 0; }
+    header { background-color: #25D366; color: white; padding: 20px; text-align: center; }
+    main { max-width: 600px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+    form { display: flex; flex-direction: column; gap: 15px; }
+    input, select { padding: 12px; border: 1px solid #ccc; border-radius: 6px; }
+    button { background-color: #25D366; color: white; border: none; padding: 12px; border-radius: 6px; cursor: pointer; }
+    button:hover { background-color: #1ebb5b; }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Form Pemesanan Panel WA</h1>
+  </header>
+  <main>
+    <form action="https://wa.me/6281234567890" method="get" target="_blank">
+      <input type="text" name="name" placeholder="Nama kamu" required />
+      <select name="panel">
+        <option value="Unli">Panel Unli - Rp 8k</option>
+        <option value="Reseller">Reseller Panel - Rp 12k</option>
+        <option value="ADP">ADP - Rp 20k</option>
+      </select>
+      <input type="text" name="username" placeholder="Username atau ID WA" required />
+      <button type="submit">Pesan Sekarang</button>
+    </form>
+  </main>
+</body>
+</html>
