@@ -1,5 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+\<!DOCTYPE html>
+<html lang="id">
 <head>
   <meta charset="UTF-8">
   <title>Jumpscare Video</title>
@@ -34,13 +34,13 @@
       setTimeout(() => {
         const video = document.getElementById("jumpscare-video");
         video.style.display = "block";
-        video.volume = 1.0; // Max volume
+        video.volume = 1.0; // Volume maksimal
         video.play();
         document.body.style.animation = "shake 0.5s infinite";
-      }, 3000); // delay 3 detik
+      }, 3000); // Delay 3 detik
     }
 
-    // Shake effect (optional)
+    // Efek getar (opsional)
     const style = document.createElement("style");
     style.innerHTML = `
       @keyframes shake {
