@@ -2,146 +2,133 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8">
-  <title>Login & Catatan Keuangan</title>
+  <title>Circle Aseph - Wisata & Keuangan</title>
   <style>
-    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
-    .container { max-width: 800px; margin: auto; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-    input, select, textarea { width: 100%; padding: 10px; margin: 5px 0 15px; border: 1px solid #ccc; border-radius: 4px; }
-    button { padding: 10px 20px; background: #007BFF; color: white; border: none; border-radius: 5px; cursor: pointer; }
-    button:hover { background: #0056b3; }
-    .hidden { display: none; }
-    .error { color: red; margin-bottom: 10px; }
-    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
-    th, td { border: 1px solid #ddd; padding: 10px; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to right, #e3f2fd, #ffffff);
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background: #0d47a1;
+      color: white;
+      padding: 20px;
+      text-align: center;
+      font-size: 28px;
+      font-weight: bold;
+    }
+    .container {
+      max-width: 900px;
+      margin: auto;
+      padding: 30px;
+      background: white;
+      margin-top: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    input, select, textarea {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    button {
+      padding: 10px 20px;
+      background: #1565c0;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    button:hover {
+      background: #003c8f;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    th, td {
+      padding: 10px;
+      border: 1px solid #ddd;
+    }
+    .info-box {
+      background: #e3f2fd;
+      padding: 15px;
+      border-radius: 8px;
+      margin-top: 20px;
+    }
+    #photoPreview img {
+      max-width: 200px;
+      margin-top: 10px;
+    }
+    .top-button {
+      text-align: center;
+      margin: 20px 0;
+    }
   </style>
 </head>
 <body>
 
+<header>CIRCLE ASEPH</header>
+
+<div class="top-button">
+  <button onclick="ajakPergi()">🚗 Ayo Pergi!</button>
+</div>
+
 <div class="container">
-  <h2 id="judulForm">Login</h2>
-  <div id="authForm">
-    <div class="error" id="errorMsg"></div>
-    <label>Username</label>
-    <input type="text" id="username">
-    <label>Password</label>
-    <input type="password" id="password">
-    <button onclick="login()">Login</button>
-    <p>Belum punya akun? <a href="#" onclick="showSignup()">Daftar di sini</a></p>
+
+  <div class="info-box">
+    <h3>🌴 Informasi Wisata Circle</h3>
+    <ul>
+      <li><strong>Bandungan:</strong> Wisata alam & kuliner pegunungan.</li>
+      <li><strong>Umbul Sidomukti:</strong> Kolam renang di atas awan.</li>
+      <li><strong>Kampung Kopi Banaran:</strong> Wisata edukasi + agrowisata.</li>
+      <li><strong>Candi Gedong Songo:</strong> Wisata sejarah & pemandangan indah.</li>
+    </ul>
   </div>
 
-  <div id="signupForm" class="hidden">
-    <h2>Sign Up</h2>
-    <div class="error" id="signupError"></div>
-    <label>Username Baru</label>
-    <input type="text" id="newUsername">
-    <label>Password Baru</label>
-    <input type="password" id="newPassword">
-    <button onclick="signup()">Daftar</button>
-    <p>Sudah punya akun? <a href="#" onclick="showLogin()">Login di sini</a></p>
-  </div>
+  <h3>📸 Upload Foto Perjalanan</h3>
+  <input type="file" accept="image/*" onchange="uploadPhoto(this)">
+  <div id="photoPreview"></div>
 
-  <div id="mainSection" class="hidden">
-    <h2>Halo, <span id="currentUser"></span>!</h2>
+  <h3>📒 Catatan Keuangan</h3>
+  <form id="financeForm">
+    <label>Jenis</label>
+    <select id="type">
+      <option value="pemasukan">Pemasukan</option>
+      <option value="pengeluaran">Pengeluaran</option>
+      <option value="tabungan">Tabungan</option>
+    </select>
+    <label>Jumlah</label>
+    <input type="number" id="amount" required>
+    <label>Tanggal</label>
+    <input type="date" id="date" required>
+    <label>Keterangan</label>
+    <textarea id="description" required></textarea>
+    <button type="submit">Simpan</button>
+  </form>
 
-    <h3>Upload Foto Perjalanan</h3>
-    <input type="file" accept="image/*" onchange="uploadPhoto(this)">
-    <div id="photoPreview"></div>
+  <table id="dataTable">
+    <thead>
+      <tr>
+        <th>Jenis</th>
+        <th>Jumlah</th>
+        <th>Tanggal</th>
+        <th>Keterangan</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 
-    <h3>Catatan Keuangan</h3>
-    <form id="financeForm">
-      <label>Jenis</label>
-      <select id="type">
-        <option value="pemasukan">Pemasukan</option>
-        <option value="pengeluaran">Pengeluaran</option>
-        <option value="tabungan">Tabungan</option>
-      </select>
-      <label>Jumlah</label>
-      <input type="number" id="amount" required>
-      <label>Tanggal</label>
-      <input type="date" id="date" required>
-      <label>Keterangan</label>
-      <textarea id="description" required></textarea>
-      <button type="submit">Simpan</button>
-    </form>
-
-    <table id="dataTable">
-      <thead>
-        <tr>
-          <th>Jenis</th>
-          <th>Jumlah</th>
-          <th>Tanggal</th>
-          <th>Keterangan</th>
-        </tr>
-      </thead>
-      <tbody></tbody>
-    </table>
-  </div>
 </div>
 
 <script>
-  let users = []; // data akun username & password
-  let loggedInUser = "";
-
-  function showSignup() {
-    document.getElementById("authForm").classList.add("hidden");
-    document.getElementById("signupForm").classList.remove("hidden");
-    document.getElementById("judulForm").innerText = "Daftar Akun Baru";
-    clearErrors();
-  }
-
-  function showLogin() {
-    document.getElementById("signupForm").classList.add("hidden");
-    document.getElementById("authForm").classList.remove("hidden");
-    document.getElementById("judulForm").innerText = "Login";
-    clearErrors();
-  }
-
-  function clearErrors() {
-    document.getElementById("errorMsg").innerText = "";
-    document.getElementById("signupError").innerText = "";
-  }
-
-  function signup() {
-    const newUser = document.getElementById("newUsername").value.trim();
-    const newPass = document.getElementById("newPassword").value;
-
-    if (!newUser || !newPass) {
-      document.getElementById("signupError").innerText = "Username dan password harus diisi!";
-      return;
-    }
-
-    if (users.find(u => u.username === newUser)) {
-      document.getElementById("signupError").innerText = "Username sudah digunakan!";
-      return;
-    }
-
-    users.push({ username: newUser, password: newPass });
-    alert("Akun berhasil dibuat! Silakan login.");
-    showLogin();
-  }
-
-  function login() {
-    const uname = document.getElementById("username").value.trim();
-    const pass = document.getElementById("password").value;
-
-    const user = users.find(u => u.username === uname);
-    if (!user) {
-      document.getElementById("errorMsg").innerText = "Username tidak ditemukan!";
-      return;
-    }
-
-    if (user.password !== pass) {
-      document.getElementById("errorMsg").innerText = "Password salah!";
-      return;
-    }
-
-    // Login berhasil
-    loggedInUser = uname;
-    document.getElementById("currentUser").innerText = uname;
-    document.getElementById("authForm").classList.add("hidden");
-    document.getElementById("mainSection").classList.remove("hidden");
-    document.getElementById("judulForm").innerText = "Catatan Keuangan";
-    clearErrors();
+  function ajakPergi() {
+    alert("🚨 Circle Aseph: Ayo kita jalan-jalan bareng!");
   }
 
   function uploadPhoto(input) {
@@ -150,10 +137,10 @@
     if (input.files && input.files[0]) {
       const img = document.createElement("img");
       img.src = URL.createObjectURL(input.files[0]);
-      img.style.maxWidth = "200px";
-      img.style.marginTop = "10px";
       preview.appendChild(img);
-      alert("Foto berhasil diunggah!");
+      alert("✅ Foto berhasil diunggah!");
+    } else {
+      alert("⚠️ Tidak ada foto yang dipilih.");
     }
   }
 
@@ -164,11 +151,16 @@
     const date = document.getElementById("date").value;
     const desc = document.getElementById("description").value;
 
+    if (!amount || !date || !desc) {
+      alert("⚠️ Semua kolom harus diisi!");
+      return;
+    }
+
     const row = document.createElement("tr");
     row.innerHTML = `<td>${type}</td><td>${amount}</td><td>${date}</td><td>${desc}</td>`;
     document.querySelector("#dataTable tbody").appendChild(row);
 
-    alert("Data keuangan disimpan!");
+    alert("✅ Data keuangan berhasil disimpan!");
     this.reset();
   });
 </script>
