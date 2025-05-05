@@ -1,169 +1,63 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Circle Aseph - Wisata & Keuangan</title>
+  <title>Jumpscare Video</title>
   <style>
     body {
-      font-family: 'Segoe UI', sans-serif;
-      background: linear-gradient(to right, #e3f2fd, #ffffff);
-      margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #0d47a1;
+      background-color: black;
       color: white;
-      padding: 20px;
       text-align: center;
-      font-size: 28px;
-      font-weight: bold;
+      padding-top: 100px;
+      font-family: sans-serif;
     }
-    .container {
-      max-width: 900px;
-      margin: auto;
-      padding: 30px;
-      background: white;
-      margin-top: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-    input, select, textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 5px;
-      border: 1px solid #ccc;
-    }
-    button {
-      padding: 10px 20px;
-      background: #1565c0;
-      color: white;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    button:hover {
-      background: #003c8f;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-    }
-    th, td {
-      padding: 10px;
-      border: 1px solid #ddd;
-    }
-    .info-box {
-      background: #e3f2fd;
-      padding: 15px;
-      border-radius: 8px;
-      margin-top: 20px;
-    }
-    #photoPreview img {
-      max-width: 200px;
-      margin-top: 10px;
-    }
-    .top-button {
-      text-align: center;
-      margin: 20px 0;
+    #jumpscare-video {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: 9999;
     }
   </style>
 </head>
 <body>
+  <h1>Berani klik tombol ini? 😈</h1>
+  <button onclick="startScare()" style="padding: 20px; font-size: 20px;">Klik di sini</button>
 
-<header>CIRCLE ASEPH</header>
+  <video id="jumpscare-video" src="https://www.myinstants.com/media/videos/screamer.mp4" preload="auto"></video>
 
-<div class="top-button">
-  <button onclick="ajakPergi()">🚗 Ayo Pergi!</button>
-</div>
-
-<div class="container">
-
-  <div class="info-box">
-    <h3>🌴 Informasi Wisata Circle</h3>
-    <ul>
-      <li><strong>Bandungan:</strong> Wisata alam & kuliner pegunungan.</li>
-      <li><strong>Umbul Sidomukti:</strong> Kolam renang di atas awan.</li>
-      <li><strong>Kampung Kopi Banaran:</strong> Wisata edukasi + agrowisata.</li>
-      <li><strong>Candi Gedong Songo:</strong> Wisata sejarah & pemandangan indah.</li>
-    </ul>
-  </div>
-
-  <h3>📸 Upload Foto Perjalanan</h3>
-  <input type="file" accept="image/*" onchange="uploadPhoto(this)">
-  <div id="photoPreview"></div>
-
-  <h3>📒 Catatan Keuangan</h3>
-  <form id="financeForm">
-    <label>Jenis</label>
-    <select id="type">
-      <option value="pemasukan">Pemasukan</option>
-      <option value="pengeluaran">Pengeluaran</option>
-      <option value="tabungan">Tabungan</option>
-    </select>
-    <label>Jumlah</label>
-    <input type="number" id="amount" required>
-    <label>Tanggal</label>
-    <input type="date" id="date" required>
-    <label>Keterangan</label>
-    <textarea id="description" required></textarea>
-    <button type="submit">Simpan</button>
-  </form>
-
-  <table id="dataTable">
-    <thead>
-      <tr>
-        <th>Jenis</th>
-        <th>Jumlah</th>
-        <th>Tanggal</th>
-        <th>Keterangan</th>
-      </tr>
-    </thead>
-    <tbody></tbody>
-  </table>
-
-</div>
-
-<script>
-  function ajakPergi() {
-    alert("🚨 Circle Aseph: Ayo kita jalan-jalan bareng!");
-  }
-
-  function uploadPhoto(input) {
-    const preview = document.getElementById("photoPreview");
-    preview.innerHTML = "";
-    if (input.files && input.files[0]) {
-      const img = document.createElement("img");
-      img.src = URL.createObjectURL(input.files[0]);
-      preview.appendChild(img);
-      alert("✅ Foto berhasil diunggah!");
-    } else {
-      alert("⚠️ Tidak ada foto yang dipilih.");
-    }
-  }
-
-  document.getElementById("financeForm").addEventListener("submit", function(e) {
-    e.preventDefault();
-    const type = document.getElementById("type").value;
-    const amount = document.getElementById("amount").value;
-    const date = document.getElementById("date").value;
-    const desc = document.getElementById("description").value;
-
-    if (!amount || !date || !desc) {
-      alert("⚠️ Semua kolom harus diisi!");
-      return;
+  <script>
+    function startScare() {
+      setTimeout(() => {
+        const video = document.getElementById("jumpscare-video");
+        video.style.display = "block";
+        video.volume = 1.0; // Max volume
+        video.play();
+        document.body.style.animation = "shake 0.5s infinite";
+      }, 3000); // delay 3 detik
     }
 
-    const row = document.createElement("tr");
-    row.innerHTML = `<td>${type}</td><td>${amount}</td><td>${date}</td><td>${desc}</td>`;
-    document.querySelector("#dataTable tbody").appendChild(row);
-
-    alert("✅ Data keuangan berhasil disimpan!");
-    this.reset();
-  });
-</script>
-
+    // Shake effect (optional)
+    const style = document.createElement("style");
+    style.innerHTML = `
+      @keyframes shake {
+        0% { transform: translate(1px, 1px) rotate(0deg); }
+        10% { transform: translate(-1px, -2px) rotate(-1deg); }
+        20% { transform: translate(-3px, 0px) rotate(1deg); }
+        30% { transform: translate(3px, 2px) rotate(0deg); }
+        40% { transform: translate(1px, -1px) rotate(1deg); }
+        50% { transform: translate(-1px, 2px) rotate(-1deg); }
+        60% { transform: translate(-3px, 1px) rotate(0deg); }
+        70% { transform: translate(3px, 1px) rotate(-1deg); }
+        80% { transform: translate(-1px, -1px) rotate(1deg); }
+        90% { transform: translate(1px, 2px) rotate(0deg); }
+        100% { transform: translate(1px, -2px) rotate(-1deg); }
+      }
+    `;
+    document.head.appendChild(style);
+  </script>
 </body>
 </html>
