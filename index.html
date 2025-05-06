@@ -1,63 +1,158 @@
-\<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <title>Jumpscare Video</title>
-  <style>
-    body {
-      background-color: black;
-      color: white;
-      text-align: center;
-      padding-top: 100px;
-      font-family: sans-serif;
-    }
-    #jumpscare-video {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100vw;
-      height: 100vh;
-      object-fit: cover;
-      z-index: 9999;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <title>Kelas 7G Spero</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            background-color: #2c3e50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #34495e;
+            overflow: hidden;
+        }
+        nav a {
+            float: left;
+            display: block;
+            color: #ecf0f1;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        nav a:hover {
+            background-color: #1abc9c;
+            color: white;
+        }
+        section {
+            padding: 20px;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .gallery img {
+            width: 200px;
+            height: auto;
+            border: 2px solid #ccc;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #bdc3c7;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+        }
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+    </style>
 </head>
 <body>
-  <h1>Berani klik tombol ini? 😈</h1>
-  <button onclick="startScare()" style="padding: 20px; font-size: 20px;">Klik di sini</button>
 
-  <video id="jumpscare-video" src="https://www.myinstants.com/media/videos/screamer.mp4" preload="auto"></video>
+<header>
+    <h1>Website Kelas 7G Spero</h1>
+</header>
 
-  <script>
-    function startScare() {
-      setTimeout(() => {
-        const video = document.getElementById("jumpscare-video");
-        video.style.display = "block";
-        video.volume = 1.0; // Volume maksimal
-        video.play();
-        document.body.style.animation = "shake 0.5s infinite";
-      }, 3000); // Delay 3 detik
-    }
+<nav>
+    <a href="#beranda">Beranda</a>
+    <a href="#galeri">Galeri Foto</a>
+    <a href="#kas">Laporan Kas</a>
+    <a href="#siswa">Daftar Siswa</a>
+</nav>
 
-    // Efek getar (opsional)
-    const style = document.createElement("style");
-    style.innerHTML = `
-      @keyframes shake {
-        0% { transform: translate(1px, 1px) rotate(0deg); }
-        10% { transform: translate(-1px, -2px) rotate(-1deg); }
-        20% { transform: translate(-3px, 0px) rotate(1deg); }
-        30% { transform: translate(3px, 2px) rotate(0deg); }
-        40% { transform: translate(1px, -1px) rotate(1deg); }
-        50% { transform: translate(-1px, 2px) rotate(-1deg); }
-        60% { transform: translate(-3px, 1px) rotate(0deg); }
-        70% { transform: translate(3px, 1px) rotate(-1deg); }
-        80% { transform: translate(-1px, -1px) rotate(1deg); }
-        90% { transform: translate(1px, 2px) rotate(0deg); }
-        100% { transform: translate(1px, -2px) rotate(-1deg); }
-      }
-    `;
-    document.head.appendChild(style);
-  </script>
+<section id="beranda">
+    <h2>Selamat Datang di Kelas 7G Spero</h2>
+    <p>Ini adalah halaman resmi kelas 7G Spero. Di sini Anda dapat menemukan informasi tentang kegiatan kelas, laporan kas, dan daftar siswa.</p>
+</section>
+
+<section id="galeri">
+    <h2>Galeri Foto Kegiatan</h2>
+    <div class="gallery">
+        <img src="images/foto1.jpg" alt="Kegiatan 1">
+        <img src="images/foto2.jpg" alt="Kegiatan 2">
+        <img src="images/foto3.jpg" alt="Kegiatan 3">
+        <!-- Tambahkan lebih banyak foto sesuai kebutuhan -->
+    </div>
+</section>
+
+<section id="kas">
+    <h2>Laporan Kas Kelas</h2>
+    <table>
+        <tr>
+            <th>Tanggal</th>
+            <th>Deskripsi</th>
+            <th>Pemasukan</th>
+            <th>Pengeluaran</th>
+            <th>Saldo</th>
+        </tr>
+        <tr>
+            <td>01-01-2025</td>
+            <td>Iuran Bulanan</td>
+            <td>Rp 500.000</td>
+            <td>-</td>
+            <td>Rp 500.000</td>
+        </tr>
+        <tr>
+            <td>05-01-2025</td>
+            <td>Belanja Alat Tulis</td>
+            <td>-</td>
+            <td>Rp 150.000</td>
+            <td>Rp 350.000</td>
+        </tr>
+        <!-- Tambahkan lebih banyak data sesuai kebutuhan -->
+    </table>
+</section>
+
+<section id="siswa">
+    <h2>Daftar Nama Siswa Kelas 7G</h2>
+    <ol>
+        <li>Ahmad Faizi Keyzar Al Amin</li>
+        <li>Al Vira Rahmadina</li>
+        <li>Amelia Maghfira</li>
+        <li>Aringga Surya Pradana</li>
+        <li>Auliya Fidelya</li>
+        <li>Faiz Alwi Syihab</li>
+        <li>Fibry Firdausi Nuzula</li>
+        <li>Fitra Ramadhani Syarif</li>
+        <li>Istiazah Naila Isya</li>
+        <li>Jihan Noor Latifah</li>
+        <li>Kayla Aura Khansa Siswanto</li>
+        <li>M Reyhan Pratama</li>
+        <li>M. Fahril Fahmi</li>
+        <li>M. Rafif Dimas Prasetyo</li>
+        <li>Melynda Nur Anggraini</li>
+        <li>Moch. Priyo Sallafudin</li>
+        <li>Mohammad Doriz Dwi Widhiyansyah</li>
+        <li>Muhammad Akbaruddin</li>
+        <li>uy</li>
+        <li>Zaahira Nur Habibah</li>
+        <!-- Tambahkan lebih banyak nama sesuai kebutuhan -->
+    </ol>
+</section>
+
+<footer>
+    <p>&copy; 2025 Kelas 7G Spero</p>
+</footer>
+
 </body>
 </html>
