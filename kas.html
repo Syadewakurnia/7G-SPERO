@@ -1,72 +1,92 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <title>Laporan Kas Kelas 7G Spero</title>
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header, footer {
-            background-color: #2c3e50; color: white; text-align: center; padding: 20px;
-        }
-        nav {
-            background-color: #34495e; text-align: center;
-        }
-        nav a {
-            display: inline-block; color: #ecf0f1; padding: 14px 20px;
-            text-decoration: none;
-        }
-        nav a:hover { background-color: #1abc9c; color: white; }
-        section { padding: 20px; }
-        table {
-            width: 100%; border-collapse: collapse; margin-top: 20px;
-        }
-        th, td {
-            border: 1px solid #bdc3c7; padding: 10px; text-align: center;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Laporan Kas Kelas 7G Spero</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
+    header, footer { background-color: #2c3e50; color: white; text-align: center; padding: 20px; }
+    nav { background-color: #34495e; text-align: center; }
+    nav a {
+      display: inline-block; color: #ecf0f1; padding: 14px 20px;
+      text-decoration: none;
+    }
+    nav a:hover { background-color: #1abc9c; color: white; }
+    section { padding: 20px; }
+    table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+    th, td { border: 1px solid #bdc3c7; padding: 10px; text-align: center; }
+    input { padding: 5px; margin: 5px; }
+    button { padding: 7px 15px; background: #1abc9c; color: white; border: none; cursor: pointer; }
+    button:hover { background: #16a085; }
+  </style>
 </head>
 <body>
 
 <header>
-    <h1>Laporan Kas Kelas 7G Spero</h1>
+  <h1>Laporan Kas Kelas 7G Spero</h1>
 </header>
 
 <nav>
-    <a href="index.html">Beranda</a>
-    <a href="kas.html">Laporan Kas</a>
+  <a href="index.html">Beranda</a>
+  <a href="kas.html">Laporan Kas</a>
 </nav>
 
 <section>
-    <h2>Data Kas Kelas</h2>
-    <p>Silakan isi laporan kas di bawah ini sesuai tanggal, tahun, dan catatan keuangan kelas.</p>
-    <table>
-        <thead>
-            <tr>
-                <th>Tanggal</th>
-                <th>Tahun</th>
-                <th>Deskripsi</th>
-                <th>Pemasukan</th>
-                <th>Pengeluaran</th>
-                <th>Saldo</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>01/01</td>
-                <td>2025</td>
-                <td>Contoh: Iuran Bulanan</td>
-                <td>Rp 20.000</td>
-                <td>Rp 0</td>
-                <td>Rp 20.000</td>
-            </tr>
-            <!-- Tambahkan baris lain di sini -->
-        </tbody>
-    </table>
+  <h2>Tambah Data Kas</h2>
+  <form id="kasForm">
+    <input type="date" id="tanggal" required />
+    <input type="text" id="deskripsi" placeholder="Deskripsi" required />
+    <input type="number" id="pemasukan" placeholder="Pemasukan (Rp)" />
+    <input type="number" id="pengeluaran" placeholder="Pengeluaran (Rp)" />
+    <button type="submit">Tambah</button>
+  </form>
+
+  <h2>Rekapitulasi Kas</h2>
+  <table id="kasTable">
+    <thead>
+      <tr>
+        <th>Tanggal</th>
+        <th>Deskripsi</th>
+        <th>Pemasukan</th>
+        <th>Pengeluaran</th>
+        <th>Saldo</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
 </section>
 
 <footer>
-    <p>&copy; 2025 Kelas 7G Spero</p>
+  <p>&copy; 2025 Kelas 7G Spero</p>
 </footer>
+
+<script>
+  let saldo = 0;
+  const form = document.getElementById('kasForm');
+  const tableBody = document.querySelector('#kasTable tbody');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const tanggal = document.getElementById('tanggal').value;
+    const deskripsi = document.getElementById('deskripsi').value;
+    const pemasukan = parseInt(document.getElementById('pemasukan').value) || 0;
+    const pengeluaran = parseInt(document.getElementById('pengeluaran').value) || 0;
+
+    saldo += pemasukan - pengeluaran;
+
+    const row = document.createElement('tr');
+    row.innerHTML = `
+      <td>${tanggal}</td>
+      <td>${deskripsi}</td>
+      <td>${pemasukan > 0 ? "Rp " + pemasukan.toLocaleString() : "-"}</td>
+      <td>${pengeluaran > 0 ? "Rp " + pengeluaran.toLocaleString() : "-"}</td>
+      <td>Rp ${saldo.toLocaleString()}</td>
+    `;
+    tableBody.appendChild(row);
+
+    form.reset();
+  });
+</script>
 
 </body>
 </html>
